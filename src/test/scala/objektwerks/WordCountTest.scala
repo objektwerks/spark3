@@ -9,7 +9,7 @@ class WordCountTest extends AnyFunSuite with Matchers {
   import sparkSession.implicits._
 
   test("dataset") {
-    val lines: Dataset[String] = sparkSession.read.textFile("./data/words/getttyburg.address.txt")
+    val lines: Dataset[String] = sparkSession.read.textFile("./data/words/gettysburg.address.txt")
     val counts = lines
       .flatMap(line => line.split("\\W+"))
       .filter(_.nonEmpty)
@@ -21,7 +21,7 @@ class WordCountTest extends AnyFunSuite with Matchers {
   }
 
   test("dataframe") {
-    val lines: Dataset[Row] = sparkSession.read.textFile("./data/words/getttyburg.address.txt").toDF("line")
+    val lines: Dataset[Row] = sparkSession.read.textFile("./data/words/gettysburg.address.txt").toDF("line")
     val counts = lines
       .flatMap(row => row.getString(0).split("\\W+"))
       .filter(_.nonEmpty)
