@@ -44,9 +44,8 @@ class WordCountTest extends AnyFunSuite with Matchers {
       .outputMode("complete")
       .format("memory")
       .start()
-      .awaitTermination(1000L)
-    val words = sparkSession.sql("select * from words").cache
+      .awaitTermination(3000L)
+    val words = sparkSession.sql("select * from words")
     words.count shouldBe 138
-    words.sort("value").show(numRows = 138, truncate = false)
   }
 }
