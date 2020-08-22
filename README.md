@@ -2,6 +2,10 @@ Spark3
 ------
 >The purpose of the project is to test Spark 3 features.
 
+Note
+----
+>Spark 3 supports JDK 11.
+
 Test
 ----
 1. sbt clean test

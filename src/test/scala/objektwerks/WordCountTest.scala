@@ -40,11 +40,11 @@ class WordCountTest extends AnyFunSuite with Matchers {
       .groupByKey(_.toLowerCase)
       .count
       .writeStream
+      .format("memory")
       .queryName("words")
       .outputMode("complete")
-      .format("memory")
       .start()
-      .awaitTermination(3000L)
+      .awaitTermination(4000L) // Warning: Spark 3 is slower than Spark 2. So this await value might need to be increased.
     val words = sparkSession.sql("select * from words")
     words.count shouldBe 138
   }
