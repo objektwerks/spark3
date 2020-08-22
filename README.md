@@ -2,9 +2,10 @@ Spark3
 ------
 >The purpose of the project is to test Spark 3 features.
 
-Note
-----
->Spark 3 supports JDK 11.
+Warning
+-------
+>While Spark 3 supports JDK 11, it is slower than using JDK 8. Consequently this project useds JDK 8.
+>It also appears that a number of features in Spark 3 are slower than in Spark 2. So always benchmark! :)
 
 Test
 ----
