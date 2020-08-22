@@ -4,8 +4,8 @@ Spark3
 
 Warning
 -------
->While Spark 3 supports JDK 11, it is slower than using JDK 8. Consequently this project useds JDK 8.
->It also appears that a number of features in Spark 3 are slower than in Spark 2. So always benchmark! :)
+>Anecdotal evidence suggests that Spark 3, using JDK 11, is slower than using JDK 8.
+>You can target different JDK version via .sbtopts
 
 Test
 ----

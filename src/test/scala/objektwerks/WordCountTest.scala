@@ -44,7 +44,7 @@ class WordCountTest extends AnyFunSuite with Matchers {
       .queryName("words")
       .outputMode("complete")
       .start()
-      .awaitTermination(4000L) // Warning: Spark 3 is slower than Spark 2. So this await value might need to be increased.
+      .awaitTermination(6000L) // Warning: Spark 3 is slower than Spark 2. So this await value might need to be increased.
     val words = sparkSession.sql("select * from words")
     words.count shouldBe 138
   }
