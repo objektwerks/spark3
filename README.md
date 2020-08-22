@@ -1,6 +1,6 @@
 Spark3
 ------
->The purpose of the project is to test Spark 3 features.
+>This project tests Spark 3 features.
 
 Warning
 -------
