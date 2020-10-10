@@ -25,9 +25,6 @@ class DataSourceTest extends AnyFunSuite with Matchers {
   }
 
   test("text") {
-    val rdd = sparkContext.textFile("./data/txt/license.txt")
-    rdd.count shouldBe 19
-
     val dataframe = sparkSession.read.text("./data/txt/license.txt")
     dataframe.count shouldBe 19
 
@@ -94,7 +91,7 @@ class DataSourceTest extends AnyFunSuite with Matchers {
       """.execute.apply
   }
 
-  private def readPersonsDatasource: Dataset[Person] = {
+  private def readPersonsDatasource: Dataset[Person] =
     sparkSession
       .read
       .format("jdbc")
@@ -105,16 +102,14 @@ class DataSourceTest extends AnyFunSuite with Matchers {
       .option("dbtable", "persons")
       .load
       .as[Person]
-  }
 
-  private def personsToAvgAgeByRole(persons: Dataset[Person]): Dataset[AvgAgeByRole] = {
+  private def personsToAvgAgeByRole(persons: Dataset[Person]): Dataset[AvgAgeByRole] =
     persons
       .groupBy("role")
       .avg("age")
       .map(row => AvgAgeByRole(row.getString(0), row.getDouble(1)))
-  }
 
-  private def writeAvgAgeByRoleDatasource(avgAgeByRole: Dataset[AvgAgeByRole]): Unit = {
+  private def writeAvgAgeByRoleDatasource(avgAgeByRole: Dataset[AvgAgeByRole]): Unit =
     avgAgeByRole
       .write
       .mode(SaveMode.Append)
@@ -125,9 +120,8 @@ class DataSourceTest extends AnyFunSuite with Matchers {
       .option("password", "sa")
       .option("dbtable", "avg_age_by_role")
       .save
-  }
 
-  private def readAvgAgeByRoleDatasource: Dataset[AvgAgeByRole] = {
+  private def readAvgAgeByRoleDatasource: Dataset[AvgAgeByRole] =
     sparkSession
       .read
       .format("jdbc")
@@ -139,5 +133,4 @@ class DataSourceTest extends AnyFunSuite with Matchers {
       .load
       .as[AvgAgeByRole]
       .cache
-  }
 }
