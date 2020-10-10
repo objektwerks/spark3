@@ -81,15 +81,13 @@ class DatasetTest extends AnyFunSuite with Matchers {
     dataset.select(max(col("age"))).map(row => Age(row.getLong(0))).head shouldBe Age(24)
   }
 
-  test("groupBy -> agg") {
+  test("groupBy > agg") {
     val groupByRole = dataset.groupBy('role).avg("age").as[(String, Double)].cache
     groupByRole.count shouldBe 2
-    groupByRole
-    .collect
-    .map {
+    groupByRole.collect.map {
       case ("husband", avgAge) => avgAge shouldBe 23.0
       case ("wife", avgAge) => avgAge shouldBe 22.0
-      case (_, _) => throw new IllegalArgumentException("GroupByRole test failed!")
+      case (_, _) => throw new IllegalArgumentException("groupBy > role > avg test failed!")
     }
   }
 
