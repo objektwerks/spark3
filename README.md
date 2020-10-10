@@ -15,9 +15,9 @@ Bloop
 -----
 1. sbt bloopInstall
 2. bloop projects
-3. bloop clean spark
-4. bloop compile spark
-5. bloop test spark
+3. bloop clean spark3
+4. bloop compile spark3
+5. bloop test spark3
 
 Logs
 ----
@@ -56,4 +56,4 @@ Here's a few examples:
 .sbtopts
 --------
 1. Create an .sbtopts file in the project root directory.
-2. Add this line ( to line 1 ): -java-home /Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home
+2. Add this line ( to line 1 ): -java-home /Users/objektwerks/.sdkman/candidates/java/8.0.265.hs-adpt
