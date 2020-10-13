@@ -28,6 +28,14 @@ class DatasetTest extends AnyFunSuite with Matchers {
     dataset.select(idColumn, nameColumn, ageColumn, roleColumn).count shouldBe 4
   }
 
+  test("selectExpr") {
+    dataset.selectExpr("id", "name", "age", "role").count shouldBe 4
+  }
+
+  test("extend") {
+    dataset.withColumn("dog_age", $"age" * 7).head.getLong(4) shouldBe 168
+  }
+
   test("update") {
     val incrementAgeNameToUpper = dataset
       .withColumn("age", 'age + 1)

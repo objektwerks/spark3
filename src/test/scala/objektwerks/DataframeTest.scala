@@ -27,6 +27,14 @@ class DataframeTest extends AnyFunSuite with Matchers {
     dataframe.select(idColumn, nameColumn, ageColumn, roleColumn).count shouldBe 4
   }
 
+  test("selectExpr") {
+    dataframe.selectExpr("id", "name", "age", "role").count shouldBe 4
+  }
+
+  test("extend") {
+    dataframe.withColumn("dog_age", $"age" * 7).head.getLong(4) shouldBe 168
+  }
+
   test("update") {
     val incrementAgeNameToUpper = dataframe
       .withColumn("age", $"age" + 1)
