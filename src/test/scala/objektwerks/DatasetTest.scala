@@ -25,15 +25,25 @@ class DatasetTest extends AnyFunSuite with Matchers {
     val nameColumn = col("name")
     val ageColumn = column("age")
     val roleColumn = expr("role")
-    dataset.select(idColumn, nameColumn, ageColumn, roleColumn).count shouldBe 4
+    dataset
+      .select(idColumn, nameColumn, ageColumn, roleColumn)
+      .as[Person]
+      .count shouldBe 4
   }
 
   test("selectExpr") {
-    dataset.selectExpr("id", "name", "age", "role").count shouldBe 4
+    dataset
+      .selectExpr("id", "name", "age", "role")
+      .as[Person]
+      .count shouldBe 4
   }
 
-  test("extend") {
-    dataset.withColumn("dog_age", $"age" * 7).head.getLong(4) shouldBe 168
+  test("extend") { 
+    dataset
+      .withColumn("dogAge", $"age" * 7)
+      .as[PersonAsDog]
+      .head
+      .dogAge shouldBe 168
   }
 
   test("update") {

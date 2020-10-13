@@ -61,3 +61,9 @@ object Task {
   val taskSchema = Encoders.product[Task].schema
   implicit def taskOrdering: Ordering[Task] = Ordering.by(_.task)
 }
+
+final case class PersonAsDog(id: Long, age: Long, name: String, role: String, dogAge: Long)
+
+object PersonAsDog {
+  val personAsDogSchema = Encoders.product[PersonAsDog].schema
+}
