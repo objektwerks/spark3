@@ -12,11 +12,8 @@ class DatasetTest extends AnyFunSuite with Matchers {
   import sparkSession.implicits._
 
   val dataset = sparkSession.read.json("./data/person/person.json").as[Person].cache
+  dataset.write.json("./target/dataset/person.json")
 
-  test("write") {
-    dataset.write.json("./target/dataset/person.json")
-  }
-  
   test("dataset") {
     dataset.count shouldBe 4
     assert(dataset.toDF.isInstanceOf[Dataset[Row]])
