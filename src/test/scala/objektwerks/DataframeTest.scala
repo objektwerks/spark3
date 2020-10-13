@@ -19,6 +19,14 @@ class DataframeTest extends AnyFunSuite with Matchers {
     assert(dataframe.as[Person].isInstanceOf[Dataset[Person]])
   }
 
+  test("column") {
+    val idColumn = dataframe.col("id")
+    val nameColumn = col("name")
+    val ageColumn = column("age")
+    val roleColumn = expr("role")
+    dataframe.select(idColumn, nameColumn, ageColumn, roleColumn).count shouldBe 4
+  }
+
   test("update") {
     val incrementAgeNameToUpper = dataframe
       .withColumn("age", $"age" + 1)
