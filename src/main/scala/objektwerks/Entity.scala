@@ -4,7 +4,6 @@ import org.apache.spark.sql.{Encoders, ForeachWriter}
 import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
 final case class Age(value: Long)
-
 object Age {
   val ageSchema = Encoders.product[Age].schema
 }
