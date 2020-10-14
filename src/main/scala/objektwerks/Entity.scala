@@ -9,10 +9,10 @@ object Age {
   val ageSchema = Encoders.product[Age].schema
 }
 
-final case class AvgAgeByRole(role: String, avg_age: Double)
+final case class AvgAgeByRole(role: String, avgAge: Double)
 object AvgAgeByRole {
   val avgAgeByRoleSchema = Encoders.product[AvgAgeByRole].schema
-  implicit def avgAgeByRoleOrdering: Ordering[AvgAgeByRole] = Ordering.by(role => role.avg_age > role.avg_age)
+  implicit def avgAgeByRoleOrdering: Ordering[AvgAgeByRole] = Ordering.by(role => role.avgAge > role.avgAge)
 }
 
 final case class Count(value: String, count: Long)
