@@ -115,7 +115,7 @@ class DatasetTest extends AnyFunSuite with Matchers {
       .as[(String, Double)]
       .cache
     groupByRole.count shouldBe 2
-    groupByRole.collect.map {
+    groupByRole.collect.foreach {
       case ("husband", avgAge) => avgAge shouldBe 23.0
       case ("wife", avgAge) => avgAge shouldBe 22.0
       case _ => fail("groupBy > avg test failed!")
@@ -132,7 +132,7 @@ class DatasetTest extends AnyFunSuite with Matchers {
       )
       .cache
     groupByRole.count shouldBe 2
-    groupByRole.collect.map {
+    groupByRole.collect.foreach {
       case Row("husband", minAge, avgAge, maxAge) =>
         minAge shouldBe 22
         avgAge shouldBe 23.0
