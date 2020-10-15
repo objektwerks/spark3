@@ -120,7 +120,7 @@ class DataframeTest extends AnyFunSuite with Matchers {
     }
   }
 
-  test("groupBy -> agg( min, avg, max)") {
+  test("groupBy > agg( min, avg, max)") {
     val groupByRole = dataframe
       .groupBy("role")
       .agg(
@@ -138,7 +138,8 @@ class DataframeTest extends AnyFunSuite with Matchers {
       case Row("wife", minAge, avgAge, maxAge) => 
         minAge shouldBe 21
         avgAge shouldBe 22.0
-        maxAge shouldBe 23    }
+        maxAge shouldBe 23
+    }
   }
 
   test("window") {
