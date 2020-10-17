@@ -122,7 +122,7 @@ class DatasetTest extends AnyFunSuite with Matchers {
     }
   }
 
-  test("groupBy > agg( min, avg, max)") {
+  test("groupBy > agg(min, avg, max)") {
     val groupByRole = dataset
       .groupBy("role")
       .agg(

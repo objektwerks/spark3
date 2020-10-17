@@ -120,7 +120,7 @@ class DataframeTest extends AnyFunSuite with Matchers {
     }
   }
 
-  test("groupBy > agg( min, avg, max)") {
+  test("groupBy > agg(min, avg, max)") {
     val groupByRole = dataframe
       .groupBy("role")
       .agg(
