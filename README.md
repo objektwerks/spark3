@@ -1,10 +1,6 @@
-Spark3
-------
->This project tests Spark 3 features.
-
-JDK
----
->Spark 3 may be used with JDK 8 or JDK 11. Anecdotal evidence suggests JDK 11 is slower than JDK 8.
+Spark 3
+-------
+>Tests Spark 3 features.
 
 Test
 ----
@@ -42,9 +38,9 @@ Tuning
 11. spark web/history ui
 12. tungsten
 
-JDKs
-----
->Spark 3 requires JDK 8 or JDK 11. Via Sbt, use as follows:
+JDK
+---
+>Spark 3 requires JDK 8 or JDK 11. Anecdotal evidence suggests JDK 11 is slower than JDK 8. Via Sbt, use as follows:
 
 * sbt clean test -java-home /Users/objektwerks/.sdkman/candidates/java/8.0.275.hs-adpt
 * sbt run -java-home /Users/objektwerks/.sdkman/candidates/java/8.0.275.hs-adpt
