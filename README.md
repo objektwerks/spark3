@@ -27,8 +27,8 @@ Events
 ------
 1. ./target/local-*
 
-Tunning
-------- 
+Tuning
+------
 1. kyro serialization
 2. partitions
 3. driver and executor memory/cores
