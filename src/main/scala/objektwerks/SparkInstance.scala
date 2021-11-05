@@ -13,14 +13,14 @@ object SparkInstance {
   println(s"*** $sparkEventLogDir exists or was created: $sparkEventDirCreated")
 
   val sparkSession = SparkSession
-    .builder
+    .builder()
     .master("local[*]")
     .appName("spark-app")
     .config("spark.sql.shuffle.partitions", "4")
     .config("spark.sql.warehouse.dir", sparkWarehouseDir)
     .config("spark.eventLog.enabled", value = true)
     .config("spark.eventLog.dir", sparkEventLogDir)
-    .enableHiveSupport
+    .enableHiveSupport()
     .getOrCreate()
   val sparkContext = sparkSession.sparkContext
   println("*** Initialized Spark instance.")
