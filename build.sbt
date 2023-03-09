@@ -11,7 +11,7 @@ libraryDependencies ++= {
     "org.apache.spark" %% "spark-hive" % sparkVersion,
     "org.scalikejdbc" %% "scalikejdbc" % "3.5.0",
     "com.h2database" % "h2" % "2.1.214",
-    "org.slf4j" % "slf4j-api" % "2.0.6",
+    "org.slf4j" % "slf4j-api" % "1.7.36",
     "org.scalatest" %% "scalatest" % "3.2.15" % Test
   )
 }
