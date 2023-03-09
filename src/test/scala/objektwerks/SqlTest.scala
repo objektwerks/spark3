@@ -4,10 +4,10 @@ import org.apache.spark.sql.{Dataset, Row, SaveMode}
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-class SqlTest extends AnyFunSuite with Matchers {
-  import SparkInstance._
-  import sparkSession.implicits._
+import SparkInstance._
+import sparkSession.implicits._
 
+class SqlTest extends AnyFunSuite with Matchers {
   test("dataframe sql") {
     val dataframe = sparkSession.read.json("./data/person/person.json").cache
     assert(dataframe.isInstanceOf[Dataset[Row]])
