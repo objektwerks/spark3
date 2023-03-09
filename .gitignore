@@ -1,6 +1,6 @@
 .*
 !.gitignore
-!.sbtopts
+!.jvmopts
 project/metals.sbt
 project/project/
 project/target/
