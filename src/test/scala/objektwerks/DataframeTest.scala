@@ -1,15 +1,15 @@
 package objektwerks
 
 import org.apache.spark.sql.{DataFrame, Dataset, Row}
+import org.apache.spark.sql.expressions._
+import org.apache.spark.sql.functions._
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-class DataframeTest extends AnyFunSuite with Matchers {
-  import SparkInstance._
-  import org.apache.spark.sql.expressions._
-  import org.apache.spark.sql.functions._
-  import sparkSession.implicits._
+import SparkInstance._
+import sparkSession.implicits._
 
+class DataframeTest extends AnyFunSuite with Matchers {
   val dataframe = sparkSession.read.json("./data/person/person.json").cache
   dataframe.write.json("./target/dataframe/person.json")
 
