@@ -5,9 +5,9 @@ import org.scalatest.matchers.should.Matchers
 
 import scala.collection.JavaConverters._
 
-class AccumulatorTest extends AnyFunSuite with Matchers {
-  import SparkInstance._
+import SparkInstance._
 
+class AccumulatorTest extends AnyFunSuite with Matchers {
   test("long accumulator") {
     val longAcc = sparkContext.longAccumulator("longAcc")
     longAcc.add(1)
