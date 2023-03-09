@@ -4,10 +4,10 @@ import org.apache.spark.sql.{Dataset, SaveMode}
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-class DataSourceTest extends AnyFunSuite with Matchers {
-  import SparkInstance._
-  import sparkSession.implicits._
+import SparkInstance._
+import sparkSession.implicits._
 
+class DataSourceTest extends AnyFunSuite with Matchers {
   test("csv") {
     val dataframe = sparkSession
       .read
