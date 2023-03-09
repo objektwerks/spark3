@@ -3,10 +3,10 @@ package objektwerks
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-class BroadcastTest extends AnyFunSuite with Matchers {
-  import SparkInstance._
-  import sparkSession.implicits._
+import SparkInstance._
+import sparkSession.implicits._
 
+class BroadcastTest extends AnyFunSuite with Matchers {
   test("broadcast join") {
     val broadcastPersons = sparkContext.broadcast(sparkSession.read.json("./data/person/person.json").as[Person])
 
