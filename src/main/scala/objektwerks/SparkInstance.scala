@@ -7,7 +7,7 @@ import org.apache.spark.sql.SparkSession
 import scala.util.Try
 
 object SparkInstance {
-  System.setSecurityManager(null) // Resolves Derby DB access issue.
+  //System.setSecurityManager(null) // Resolves Derby DB access issue.
 
   val sparkWarehouseDir = new File("./target/spark-warehouse").getAbsolutePath
   val sparkEventLogDir = "/tmp/spark-events"
@@ -30,7 +30,7 @@ object SparkInstance {
   sys.addShutdownHook {
     sparkSession.stop()
     println("*** Terminated Spark instance.")
-  }
+  }:Unit
 
   def createSparkEventsDir(dir: String): Boolean = {
     import java.nio.file.{Files, Paths}
