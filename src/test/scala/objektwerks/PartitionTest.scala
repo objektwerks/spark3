@@ -5,10 +5,10 @@ import java.util.UUID
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-class PartitionTest extends AnyFunSuite with Matchers {
-  import SparkInstance._
-  import sparkSession.implicits._
+import SparkInstance._
+import sparkSession.implicits._
 
+class PartitionTest extends AnyFunSuite with Matchers {
   val dataframe = (1 to 10).toList.toDF("number")
 
   test("partition") {
