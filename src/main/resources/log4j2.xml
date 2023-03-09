@@ -8,6 +8,9 @@
         </File>
     </Appenders>
     <Loggers>
+        <Logger name="org.apache.spark" level="info" additivity="false">
+            <AppenderRef ref="app"/>
+        </Logger>
         <Root level="error">
             <AppenderRef ref="app"/>
         </Root>
