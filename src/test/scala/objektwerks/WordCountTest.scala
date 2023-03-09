@@ -4,10 +4,10 @@ import org.apache.spark.sql.{Dataset, Row}
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-class WordCountTest extends AnyFunSuite with Matchers {
-  import SparkInstance._
-  import sparkSession.implicits._
+import SparkInstance._
+import sparkSession.implicits._
 
+class WordCountTest extends AnyFunSuite with Matchers {
   test("dataset") {
     val lines: Dataset[String] = sparkSession.read.textFile("./data/words/gettysburg.address.txt")
     val counts = lines
