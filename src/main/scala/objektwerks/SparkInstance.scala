@@ -3,6 +3,7 @@ package objektwerks
 import java.io.File
 
 import org.apache.spark.sql.SparkSession
+
 import scala.util.Try
 
 object SparkInstance {
