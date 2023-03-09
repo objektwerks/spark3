@@ -1,7 +1,7 @@
 name := "spark3"
 organization := "objektwerks"
 version := "0.1-SNAPSHOT"
-scalaVersion := "2.13.10"
+scalaVersion := "3.2.2"
 libraryDependencies ++= {
   val sparkVersion = "3.3.2"
   Seq(
