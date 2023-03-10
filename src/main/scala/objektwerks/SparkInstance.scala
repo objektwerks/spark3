@@ -8,11 +8,10 @@ import org.apache.spark.sql.SparkSession
 import scala.util.Try
 
 object SparkInstance {
+  val logger = LogManager.getLogger(SparkInstance.getClass())
   val sparkWarehouseDir = new File("./target/spark-warehouse").getAbsolutePath
   val sparkEventLogDir = "/tmp/spark-events"
   val sparkEventDirCreated = createSparkEventsDir(sparkEventLogDir)
-
-  val logger = LogManager.getLogger(SparkInstance.getClass())
   logger.info(s"*** $sparkEventLogDir exists or was created: $sparkEventDirCreated")
 
   val sparkSession = SparkSession
@@ -33,7 +32,7 @@ object SparkInstance {
     logger.info("*** Terminated Spark instance.")
   }:Unit
 
-  def createSparkEventsDir(dir: String): Boolean = {
+  private def createSparkEventsDir(dir: String): Boolean = {
     import java.nio.file.{Files, Paths}
     val path = Paths.get(dir)
     if (!Files.exists(path))
