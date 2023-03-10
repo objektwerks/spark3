@@ -8,6 +8,9 @@
         </File>
     </Appenders>
     <Loggers>
+        <Logger name="objektwerks" level="info" additivity="false">
+            <AppenderRef ref="app"/>
+        </Logger>
         <Logger name="org.apache.spark" level="info" additivity="false">
             <AppenderRef ref="app"/>
         </Logger>
