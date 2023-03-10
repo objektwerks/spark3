@@ -2,6 +2,7 @@ package objektwerks
 
 import java.io.File
 
+import org.apache.logging.log4j.LogManager
 import org.apache.spark.sql.SparkSession
 
 import scala.util.Try
@@ -10,7 +11,9 @@ object SparkInstance {
   val sparkWarehouseDir = new File("./target/spark-warehouse").getAbsolutePath
   val sparkEventLogDir = "/tmp/spark-events"
   val sparkEventDirCreated = createSparkEventsDir(sparkEventLogDir)
-  println(s"*** $sparkEventLogDir exists or was created: $sparkEventDirCreated")
+
+  val logger = LogManager.getLogger(SparkInstance.getClass())
+  logger.info(s"*** $sparkEventLogDir exists or was created: $sparkEventDirCreated")
 
   val sparkSession = SparkSession
     .builder()
@@ -23,11 +26,11 @@ object SparkInstance {
     .enableHiveSupport()
     .getOrCreate()
   val sparkContext = sparkSession.sparkContext
-  println("*** Initialized Spark instance.")
+  logger.info("*** Initialized Spark instance.")
 
   sys.addShutdownHook {
     sparkSession.stop()
-    println("*** Terminated Spark instance.")
+    logger.info("*** Terminated Spark instance.")
   }:Unit
 
   def createSparkEventsDir(dir: String): Boolean = {
