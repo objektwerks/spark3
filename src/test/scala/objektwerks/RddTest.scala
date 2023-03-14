@@ -1,5 +1,7 @@
 package objektwerks
 
+import breeze.linalg.{max, min}
+
 import java.nio.charset.CodingErrorAction
 
 import org.apache.spark.HashPartitioner
@@ -175,5 +177,30 @@ class RddTest extends AnyFunSuite with Matchers {
     3309.3804F shouldBe amounts.min
     6375.45F shouldBe amounts.max
     5004.8916F shouldBe amounts.sum / amounts.length // avg
+  }
+
+  test("weather > min, max") {
+    def parseLine(line: String): (String, String, Float) = {
+      val fields = line.split(",")
+      val station = fields(0)
+      val entry = fields(2)
+      val temp = fields(3).toFloat * 0.1f * (9.0f / 5.0f) + 32.0f
+      (station, entry, temp)
+    }
+
+    val lines = sparkContext.textFile("./data/txt/weather.txt")
+    val parsedLines = lines.map(parseLine)
+
+    val minTemps = parsedLines.filter(x => x._2 == "TMIN")
+    val minStationTemps = minTemps.map(x => (x._1, x._3))
+    val minTempsByStation = minStationTemps.reduceByKey((x, y) => min(x, y))
+    val minResults = minTempsByStation.collect.sorted
+    ("EZE00100082", 7.700001F) shouldBe minResults.head
+
+    val maxTemps = parsedLines.filter(x => x._2 == "TMAX")
+    val maxStationTemps = maxTemps.map(x => (x._1, x._3.toFloat))
+    val maxTempsByStation = maxStationTemps.reduceByKey( (x,y) => max(x,y))
+    val maxResults = maxTempsByStation.collect.sorted
+    ("EZE00100082", 90.14F) shouldBe maxResults.head
   }
 }
