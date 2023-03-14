@@ -51,7 +51,7 @@ JDK
 
 .sbtopts
 --------
->Alternatively, do the following:
+>Alternatively, set up an .sbtopts file as follows:
 1. Create an .sbtopts file in the project root directory.
 2. Add this line to .sbtopts: -java-home $JAVA_HOME
 
