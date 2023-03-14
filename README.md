@@ -44,8 +44,8 @@ JDK
 ---
 >Spark 3 requires JDK 8/11/17. This project works on JDK 19! Via Sbt, use as follows:
 
-* sbt clean test -java-home $JAVA_HOME
-* sbt run -java-home $JAVA_HOME
+1. sbt clean test -java-home $JAVA_HOME
+2. sbt run -java-home $JAVA_HOME
 
 .sbtopts
 --------
@@ -54,5 +54,5 @@ JDK
 
 .jvmopts
 --------
->Spark 3 runs on JDK 17+, but see this project's .jvmopts for the how.
->And see this discussion thread for the details: https://stackoverflow.com/questions/72724816/running-unit-tests-with-spark-3-3-0-on-java-17-fails-with-illegalaccesserror-cl
+>Spark 3 runs on JDK 17+. See this project's .jvmopts for the ***how***.
+>And see this discussion thread for the ***details***: https://stackoverflow.com/questions/72724816/running-unit-tests-with-spark-3-3-0-on-java-17-fails-with-illegalaccesserror-cl
