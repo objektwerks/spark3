@@ -66,3 +66,7 @@ JDK
 >See this discussion for ***details***: https://stackoverflow.com/questions/72724816/running-unit-tests-with-spark-3-3-0-on-java-17-fails-with-illegalaccesserror-cl
 
 >At some point, this configuration will no longer be required.
+
+Resources
+---------
+1. [Spark 2](https://github.com/objektwerks/spark)
