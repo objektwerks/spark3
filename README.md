@@ -41,7 +41,7 @@ Tuning
 
 JDK
 ---
->Spark 3 requires JDK 8 or greater. This project works on JDK 19. Via Sbt, use as follows:
+>Spark 3 requires JDK 8/11/17. This project works on JDK 19! Via Sbt, use as follows:
 
 * sbt clean test -java-home $JAVA_HOME
 * sbt run -java-home $JAVA_HOME
@@ -49,4 +49,4 @@ JDK
 .sbtopts
 --------
 1. Create an .sbtopts file in the project root directory.
-2. Add this line: -java-home $JAVA_HOME
+2. Add this line to .sbtopts: -java-home $JAVA_HOME
