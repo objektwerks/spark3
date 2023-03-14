@@ -38,7 +38,10 @@ object DeltaLakeApp extends App {
       .format("console")
       .outputMode("append")
       .start
-    val rolesDelta = sparkSession.read.format("delta").load(rolesPath)
+    val rolesDelta = sparkSession
+      .read
+      .format("delta")
+      .load(rolesPath)
     rolesDelta.select("*").show
     assert( rolesDelta.select("*").count == 4 )
     sys.exit()
