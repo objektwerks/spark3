@@ -22,6 +22,8 @@ object SparkInstance {
     .config("spark.sql.warehouse.dir", sparkWarehouseDir)
     .config("spark.eventLog.enabled", value = true)
     .config("spark.eventLog.dir", sparkEventLogDir)
+    .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+    .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
     .enableHiveSupport()
     .getOrCreate()
   val sparkContext = sparkSession.sparkContext
