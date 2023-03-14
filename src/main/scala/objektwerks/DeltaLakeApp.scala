@@ -29,15 +29,7 @@ object DeltaLakeApp extends App {
       .outputMode("complete")
       .option("checkpointLocation", "./target/delta/roles/checkpoints")
       .start(rolesPath)
-      .awaitTermination(30000) // Time-dependent due to slow Delta Lake IO!
-    sparkSession
-      .readStream
-      .format("delta")
-      .load(rolesPath)
-      .writeStream
-      .format("console")
-      .outputMode("append")
-      .start
+      .awaitTermination(10000) // Time-dependent due to slow Delta Lake IO!
     val rolesDelta = sparkSession
       .read
       .format("delta")
