@@ -17,8 +17,8 @@ Test
 
 Logs
 ----
-1. target/test.log
-2. target/app.log
+1. target/app.log
+2. target/test.log
 
 Events
 ------
@@ -31,13 +31,14 @@ Tuning
 3. driver and executor memory/cores
 4. cache/persist/checkpointing
 5. narrow vs wide transformations
-6. shuffling (disk/network io)
+6. shuffling ( disk/network io )
 7. splittable files
 8. number of files and size
 9. data locality
 10. jvm gc
-11. spark web/history ui
-12. tungsten
+11. spark web ui
+12. spark web history ui
+13. tungsten
 
 JDK
 ---
