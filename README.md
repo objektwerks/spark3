@@ -41,12 +41,12 @@ Tuning
 
 JDK
 ---
->Spark 3 requires JDK 8 or JDK 11. Anecdotal evidence suggests JDK 11 is slower than JDK 8. Via Sbt, use as follows:
+>Spark 3 requires JDK 8 or greater. This project works on JDK 19. Via Sbt, use as follows:
 
-* sbt clean test -java-home /Users/objektwerks/.sdkman/candidates/java/8.0.275.hs-adpt
-* sbt run -java-home /Users/objektwerks/.sdkman/candidates/java/8.0.275.hs-adpt
+* sbt clean test -java-home $JAVA_HOME
+* sbt run -java-home $JAVA_HOME
 
 .sbtopts
 --------
 1. Create an .sbtopts file in the project root directory.
-2. Add this line: -java-home /Users/objektwerks/.sdkman/candidates/java/8.0.275.hs-adpt
+2. Add this line: -java-home $JAVA_HOME
