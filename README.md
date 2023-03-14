@@ -50,3 +50,7 @@ JDK
 --------
 1. Create an .sbtopts file in the project root directory.
 2. Add this line to .sbtopts: -java-home $JAVA_HOME
+
+.jvmopts
+--------
+>While Spark 3 runs on JDK 17+, see this project's .jvmopts for details.
