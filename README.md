@@ -15,6 +15,10 @@ Test
 ----
 1. sbt clean test
 
+Run
+---
+2. sbt clean run
+
 Logs
 ----
 1. target/app.log
