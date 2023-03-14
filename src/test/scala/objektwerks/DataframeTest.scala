@@ -163,8 +163,8 @@ class DataframeTest extends AnyFunSuite with Matchers {
     persons.count shouldBe 4
     tasks.count shouldBe 4
 
-    val joinBy = persons.col("id") === tasks.col("pid")
-    val personsTasks = persons.join(tasks, joinBy)
+    val joinCondition = persons.col("id") === tasks.col("pid")
+    val personsTasks = persons.join(tasks, joinCondition)
     personsTasks.count shouldBe 4
   }
 }
