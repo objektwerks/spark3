@@ -153,4 +153,27 @@ class RddTest extends AnyFunSuite with Matchers {
     (18, 343) shouldBe results.head
     (69, 235) shouldBe results.last
   }
+
+  test("orders > sortByKey") {
+    def parseLine(line: String): (Int, Float) = {
+      val fields = line.split(",")
+      val customer = fields(0).toInt
+      val amount = fields(2).toFloat
+      (customer, amount)
+    }
+
+    val lines = sparkContext.textFile("./data/txt/orders.txt")
+    val parsedLines = lines.map(parseLine)
+    val customerByTotal = parsedLines.reduceByKey((x,y) => x + y)
+    val totalByCustomer = customerByTotal.map(kv => (kv._2, kv._1))
+    val totalByCustomerSorted = totalByCustomer.sortByKey()
+    val results = totalByCustomerSorted.collect()
+    (3309.3804F, 45) shouldBe results.head // min
+    (6375.45F, 68) shouldBe results.last // max
+    val amounts = results.map(kv => kv._1)
+    500489.16F shouldBe amounts.sum
+    3309.3804F shouldBe amounts.min
+    6375.45F shouldBe amounts.max
+    5004.8916F shouldBe amounts.sum / amounts.length // avg
+  }
 }
