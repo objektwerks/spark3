@@ -203,4 +203,61 @@ class RddTest extends AnyFunSuite with Matchers {
     val maxResults = maxTempsByStation.collect.sorted
     ("EZE00100082", 90.14F) shouldBe maxResults.head
   }
+
+  test("movies and movie ratings > broadcast, reduceByKey") {
+    def loadMovies(): Map[Int, String] = {
+      implicit val codec = Codec("UTF-8")
+      codec.onMalformedInput(CodingErrorAction.REPLACE)
+      codec.onUnmappableCharacter(CodingErrorAction.REPLACE)
+
+      val moviesById = mutable.Map[Int, String]()
+      val source = Source.fromFile("./data/txt//movie-data.txt")
+      source.getLines foreach { line =>
+        val fields = line.split('|')
+        if (fields.length > 1) moviesById += (fields(0).toInt -> fields(1))
+      }
+      source.close
+      moviesById.toMap
+    }
+
+    val broadcastMovies = sparkContext.broadcast(loadMovies())
+    val lines = sparkContext.textFile("./data/txt/movie-ratings.txt")
+    val movies = lines.map( line => ( line.split("\t")(1).toInt, 1 ) )
+    val movieCounts = movies.reduceByKey( (x, y) => x + y )
+    val countMovies = movieCounts.map( movieCount => (movieCount._2, movieCount._1) )
+    val sortedCountMovies = countMovies.sortByKey()
+    val sortedMovieNamesByCount = sortedCountMovies.map( countMovie  => (broadcastMovies.value(countMovie._2), countMovie._1) )
+    val results = sortedMovieNamesByCount.collect
+    ("Mostro, Il (1994)", 1) shouldBe results.head  // least popular
+    ("Star Wars (1977)", 583) shouldBe results.last // most popular
+  }
+
+  test("marvel > graph analysis") {
+    implicit val codec = Codec("UTF-8")
+    codec.onMalformedInput(CodingErrorAction.REPLACE)
+    codec.onUnmappableCharacter(CodingErrorAction.REPLACE)
+
+    def countCoAppearances(line: String) = {
+      val elements = line.split("\\s+")
+      ( elements(0).toInt, elements.length - 1 )
+    }
+
+    def parseNames(line: String) : Option[(Int, String)] = {
+      val fields = line.split('\"')
+      if (fields.length > 1) Some( (fields(0).trim().toInt, fields(1)) ) else None
+    }
+
+    val marvelNameLines = sparkContext.textFile("./data/txt/marvel-names.txt")
+    val marvelNames = marvelNameLines.flatMap(parseNames)
+
+    val marvelGraphLines = sparkContext.textFile("./data/txt/marvel-graph.txt")
+    val marvelGraph = marvelGraphLines.map(countCoAppearances)
+
+    val heroByCoAppearances = marvelGraph.reduceByKey( (x, y) => x + y )
+    val coAppearancesByHero = heroByCoAppearances.map( x => (x._2, x._1) )
+    val maxCoAppearancesByHero = coAppearancesByHero.max
+    val heroWithMostCoAppearances = marvelNames.lookup(maxCoAppearancesByHero._2).head
+    heroWithMostCoAppearances shouldBe "CAPTAIN AMERICA"
+    maxCoAppearancesByHero._1 shouldBe 1933
+  }
 }
