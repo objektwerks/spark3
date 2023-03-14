@@ -53,4 +53,6 @@ JDK
 
 .jvmopts
 --------
->While Spark 3 runs on JDK 17+, see this project's .jvmopts for details.
+>Spark 3 runs on JDK 17+, but see this project's .jvmopts for the how.
+>And see this discussion thread for more details: https://stackoverflow.com/questions/72724816/running-unit-tests-with-spark-3-3-0-on-java-17-fails-with-illegalaccesserror-cl
+
