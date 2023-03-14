@@ -136,4 +136,21 @@ class RddTest extends AnyFunSuite with Matchers {
     val (word, count) = wordCounts.filter(_._2 == maxWordCount).first
     assert(word == "the" && count == 14)
   }
+
+  test("friends > average") {
+    def parseLine(line: String): (Int, Int) = {
+      val fields = line.split(",")
+      val age = fields(2).toInt
+      val friends = fields(3).toInt
+      (age, friends)
+    }
+
+    val lines = sparkContext.textFile("./data/txt/friends.txt")
+    val parsedLines = lines.map(parseLine)
+    val totalsByAge = parsedLines.mapValues(x => (x, 1)).reduceByKey((x, y) => (x._1 + y._1, x._2 + y._2)) // (age, (friends, 1))
+    val averagesByAge = totalsByAge.mapValues(x => x._1 / x._2) // (age, friends)
+    val results = averagesByAge.collect.sorted
+    (18, 343) shouldBe results.head
+    (69, 235) shouldBe results.last
+  }
 }
