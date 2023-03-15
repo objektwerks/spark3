@@ -34,7 +34,9 @@ object RecommendationApp extends App {
     println(s"${i + 1}. ${movieIdToNameMap(recommendation.product.toInt)} score ${recommendation.rating}")
   }
 
-  def loadMovieIdToNameMap(filePath: String): Map[Int, String] = {
+  sys.exit()
+
+  private def loadMovieIdToNameMap(filePath: String): Map[Int, String] = {
     implicit val codec = Codec("UTF-8")
     codec.onMalformedInput(CodingErrorAction.REPLACE)
     codec.onUnmappableCharacter(CodingErrorAction.REPLACE)
@@ -48,7 +50,7 @@ object RecommendationApp extends App {
     moviesById.toMap[Int, String]
   }
 
-  def loadMovieRatings(filePath: String): RDD[Rating] = {
+  private def loadMovieRatings(filePath: String): RDD[Rating] = {
     val lines = sparkSession.sparkContext.textFile(filePath)
     lines.map(line => line.split('\t')).map(lines => Rating(lines(0).toInt, lines(1).toInt, lines(2).toDouble)).cache
   }
