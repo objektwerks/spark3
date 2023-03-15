@@ -8,7 +8,7 @@ class ExplainTest extends AnyFunSuite with Matchers {
   import SparkInstance._
   import sparkSession.implicits._
 
-  test("explain") {
+  test("explain ") {
     val persons: Dataset[Person] = sparkSession.read.json("./data/person/person.json").as[Person].cache
     val fred: Dataset[String] = persons.map(_.name.toUpperCase).filter(_ == "FRED").cache
     fred.explain(extended = true)
