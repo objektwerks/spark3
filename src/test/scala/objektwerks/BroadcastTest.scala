@@ -8,7 +8,7 @@ import sparkSession.implicits._
 
 class BroadcastTest extends AnyFunSuite with Matchers {
   test("broadcast join") {
-    val broadcastPersons = sparkContext.broadcast(sparkSession.read.json("./data/person/person.json").as[Person])
+    val broadcastPersons = sparkContext.broadcast( sparkSession.read.json("./data/person/person.json").as[Person] )
 
     val persons = broadcastPersons.value
     val tasks = sparkSession.read.json("./data/task/task.json").as[Task]
