@@ -21,6 +21,7 @@ Run
 >Multiple main classes detected. Select one to run:
 1. objektwerks.DeltaLakeApp
 2. objektwerks.LogEntryApp
+3. objektwerks.RecommendationApp
 
 Logs
 ----
