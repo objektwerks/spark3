@@ -22,5 +22,7 @@ object LogEntryApp extends App {
     .outputMode("complete")
     .foreach(rowForeachWriter)
     .start
-    .awaitTermination
+    .awaitTermination(5000)
+
+    sys.exit()
 }
