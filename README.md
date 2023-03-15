@@ -20,9 +20,10 @@ Run
 1. sbt clean run
 >Multiple main classes detected. Select one to run:
 1. objektwerks.DeltaLakeApp
-2. objektwerks.LinearRegressionApp
-3. objektwerks.LogEntryApp
-4. objektwerks.RecommendationApp
+2. objektwerks.KMeansApp
+3. objektwerks.LinearRegressionApp
+4. objektwerks.LogEntryApp
+5. objektwerks.RecommendationApp
 
 Logs
 ----
