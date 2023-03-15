@@ -1,8 +1,11 @@
 package objektwerks
 
 import org.apache.spark.sql.{Dataset, Row}
+import org.apache.spark.streaming.{Milliseconds, StreamingContext}
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
+
+import scala.collection.mutable
 
 import SparkInstance._
 import sparkSession.implicits._
@@ -58,5 +61,17 @@ class WordCountTest extends AnyFunSuite with Matchers {
       .reduceByKey(_ + _)
       .collect
     counts.length shouldBe 138
+  }
+
+  test("dstream") {
+    val streamingContext = new StreamingContext(sparkContext, batchDuration = Milliseconds(100))
+    val dstream = textToDStream("./data/words/gettysburg.address.txt", streamingContext)
+    val wordCountDstream = countWords(dstream)
+    val buffer = mutable.ArrayBuffer[(String, Int)]()
+    wordCountDstream foreachRDD { rdd => buffer ++= rdd.collect }
+    streamingContext.start
+    streamingContext.awaitTerminationOrTimeout(100)
+    streamingContext.stop(stopSparkContext = false, stopGracefully = true)
+    buffer.size shouldBe 138
   }
 }
