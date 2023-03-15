@@ -6,9 +6,10 @@ import org.scalatest.matchers.should.Matchers
 import SparkInstance._
 import sparkSession.implicits._
 
+import Person._
+
 class StructuredStreamingTest extends AnyFunSuite with Matchers {
   test("structured streaming") {
-    import Person._
     sparkSession
       .readStream
       .schema(personStructType)
