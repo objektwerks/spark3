@@ -17,7 +17,10 @@ Test
 
 Run
 ---
-2. sbt clean run
+1. sbt clean run
+>Multiple main classes detected. Select one to run:
+1. objektwerks.DeltaLakeApp
+2. objektwerks.LogEntryApp
 
 Logs
 ----
