@@ -8,7 +8,7 @@ import SparkInstance._
 import sparkSession.implicits._
 
 class StructuredStreamingTest extends AnyFunSuite with Matchers {
-  test("structured streaming") {
+  test("person") {
     sparkSession
       .readStream
       .schema(personStructType)
