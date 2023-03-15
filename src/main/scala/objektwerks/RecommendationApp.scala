@@ -41,8 +41,7 @@ object RecommendationApp extends App {
 
     val moviesById = mutable.Map[Int, String]()
     val lines = Source.fromFile(filePath).getLines().toList
-    println(s"number of lines: ${lines.length}")
-    lines filter(l => l.nonEmpty && l.length >= 2) foreach { line =>
+    lines foreach { line =>
       val fields = line.split('|')
       if (fields.length > 1) moviesById += (fields(0).toInt -> fields(1))
     }
