@@ -17,7 +17,7 @@ object DeltaLakeApp extends App {
     .outputMode("complete")
     .option("checkpointLocation", "./target/delta/roles/checkpoints")
     .start(rolesPath)
-    .awaitTermination(3000)
+    .awaitTermination(5000)
 
   val rolesDelta = sparkSession
     .read
