@@ -48,4 +48,15 @@ class WordCountTest extends AnyFunSuite with Matchers {
     val words = sparkSession.sql("select * from words")
     words.count shouldBe 138
   }
+
+  test("rdd") {
+    val lines = sparkContext.textFile("./data/words/gettysburg.address.txt")
+    val counts = lines.flatMap(line => line.split("\\W+"))
+      .filter(_.nonEmpty)
+      .map(_.toLowerCase)
+      .map(word => (word, 1))
+      .reduceByKey(_ + _)
+      .collect
+    counts.length shouldBe 138
+  }
 }
