@@ -31,7 +31,7 @@ class DataframeTest extends AnyFunSuite with Matchers {
     dataframe.selectExpr("id", "name", "age", "role").count shouldBe 4
   }
 
-  test("extend") {
+  test("add column") {
     dataframe.withColumn("dog_age", $"age" * 7).head.getLong(4) shouldBe 168
   }
 
@@ -60,9 +60,9 @@ class DataframeTest extends AnyFunSuite with Matchers {
   test("filter") {
     val filterByName = dataframe.filter("name == 'barney'").cache
     filterByName.count shouldBe 1
-    filterByName.head.getLong(0) shouldBe 22
-    filterByName.head.getString(2) shouldBe "barney"
-    filterByName.head.getString(3) shouldBe "husband"
+    filterByName.head.getAs[Long]("age") shouldBe 22
+    filterByName.head.getAs[String]("name") shouldBe "barney"
+    filterByName.head.getAs[String]("role") shouldBe "husband"
   }
 
   test("select > where") {
@@ -82,9 +82,9 @@ class DataframeTest extends AnyFunSuite with Matchers {
   }
 
   test("sort") {
-    val sortByName = dataframe.sort("name").cache
+    val sortByName = dataframe.select(col("id"), col("age"), col("name"), col("role")).sort("name").cache
     sortByName.count shouldBe 4
-    sortByName.head.getLong(0) shouldBe 22
+    sortByName.head.getLong(1) shouldBe 22
     sortByName.head.getString(2) shouldBe "barney"
     sortByName.head.getString(3) shouldBe "husband"
   }
