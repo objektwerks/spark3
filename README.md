@@ -1,6 +1,6 @@
 Spark 3
 -------
->Spark 3 features apps and tests.
+>Spark 3 apps and tests.
 
 Architecture
 ------------
