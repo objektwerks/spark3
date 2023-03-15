@@ -38,7 +38,7 @@ class DatasetTest extends AnyFunSuite with Matchers {
       .count shouldBe 4
   }
 
-  test("extend") { 
+  test("add column") {
     dataset
       .withColumn("dogAge", $"age" * 7)
       .as[PersonAsDog]
