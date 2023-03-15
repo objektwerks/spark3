@@ -6,13 +6,11 @@ import org.scalatest.matchers.should.Matchers
 
 import SparkInstance._
 import sparkSession.implicits._
-
-class ExplainTest extends AnyFunSuite with Matchers {
+  
+class DescribeTest extends AnyFunSuite with Matchers {
   test("explain ") {
     val persons: Dataset[Person] = sparkSession.read.json("./data/person/person.json").as[Person].cache
-    val fred: Dataset[String] = persons.map(_.name.toUpperCase).filter(_ == "FRED").cache
-    fred.explain(extended = true)
-    fred.count shouldBe 1
-    fred.head shouldBe "FRED"
+    persons.count shouldBe 4
+    persons.describe("id", "age", "name", "role")
   }
 }
