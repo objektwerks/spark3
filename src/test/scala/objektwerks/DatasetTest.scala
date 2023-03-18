@@ -4,6 +4,7 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.{Dataset, Row}
 import org.apache.spark.sql.expressions._
 import org.apache.spark.sql.functions._
+import org.apache.spark.storage.StorageLevel
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
@@ -11,7 +12,7 @@ import SparkInstance._
 import sparkSession.implicits._
 
 class DatasetTest extends AnyFunSuite with Matchers {
-  val dataset = sparkSession.read.json("./data/person/person.json").as[Person].cache
+  val dataset = sparkSession.read.json("./data/person/person.json").as[Person].persist(StorageLevel.MEMORY_ONLY)
   dataset.write.json("./target/dataset/person.json")
 
   test("dataset") {
