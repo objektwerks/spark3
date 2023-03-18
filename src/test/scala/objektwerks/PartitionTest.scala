@@ -2,6 +2,7 @@ package objektwerks
 
 import java.util.UUID
 
+import org.apache.spark.storage.StorageLevel
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
@@ -9,7 +10,7 @@ import SparkInstance._
 import sparkSession.implicits._
 
 class PartitionTest extends AnyFunSuite with Matchers {
-  val dataframe = (1 to 10).toList.toDF("number")
+  val dataframe = (1 to 10).toList.toDF("number").persist(StorageLevel.MEMORY_ONLY)
 
   test("partition") {
     dataframe.rdd.partitions.length shouldEqual 8
