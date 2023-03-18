@@ -4,15 +4,18 @@ import org.apache.spark.sql.{DataFrame, Dataset, Row}
 import org.apache.spark.sql.expressions._
 import org.apache.spark.sql.functions._
 import org.apache.spark.storage.StorageLevel
+import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
 import SparkInstance._
 import sparkSession.implicits._
 
-class DataframeTest extends AnyFunSuite with Matchers {
+class DataframeTest extends AnyFunSuite with Matchers with BeforeAndAfterAll {
   val dataframe = sparkSession.read.json("./data/person/person.json").persist(StorageLevel.MEMORY_ONLY)
   dataframe.write.json("./target/dataframe/person.json")
+
+  override def afterAll(): Unit = dataframe.unpersist()
 
   test("dataframe") {
     dataframe.count shouldBe 4
