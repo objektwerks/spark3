@@ -3,6 +3,7 @@ package objektwerks
 import org.apache.spark.sql.{DataFrame, Dataset, Row}
 import org.apache.spark.sql.expressions._
 import org.apache.spark.sql.functions._
+import org.apache.spark.storage.StorageLevel
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
@@ -10,7 +11,7 @@ import SparkInstance._
 import sparkSession.implicits._
 
 class DataframeTest extends AnyFunSuite with Matchers {
-  val dataframe = sparkSession.read.json("./data/person/person.json").cache
+  val dataframe = sparkSession.read.json("./data/person/person.json").persist(StorageLevel.MEMORY_ONLY)
   dataframe.write.json("./target/dataframe/person.json")
 
   test("dataframe") {
