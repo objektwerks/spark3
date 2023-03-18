@@ -3,14 +3,17 @@ package objektwerks
 import java.util.UUID
 
 import org.apache.spark.storage.StorageLevel
+import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
 import SparkInstance._
 import sparkSession.implicits._
 
-class PartitionTest extends AnyFunSuite with Matchers {
+class PartitionTest extends AnyFunSuite with Matchers with BeforeAndAfterAll {
   val dataframe = (1 to 10).toList.toDF("number").persist(StorageLevel.MEMORY_ONLY)
+
+  override def afterAll(): Unit = dataframe.unpersist()
 
   test("partition") {
     dataframe.rdd.partitions.length shouldEqual 8
