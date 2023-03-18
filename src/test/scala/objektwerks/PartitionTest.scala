@@ -11,7 +11,7 @@ import SparkInstance._
 import sparkSession.implicits._
 
 class PartitionTest extends AnyFunSuite with Matchers with BeforeAndAfterAll {
-  val dataframe = (1 to 10).toList.toDF("number").persist(StorageLevel.MEMORY_ONLY)
+  val dataframe = (1 to 10).toList.toDF("number").persist(StorageLevel.MEMORY_AND_DISK)
 
   override def afterAll(): Unit = dataframe.unpersist()
 
