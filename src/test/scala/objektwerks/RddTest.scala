@@ -37,6 +37,14 @@ class RddTest extends AnyFunSuite with Matchers {
     assert(rdd.take(1) sameElements Array(1))
   }
 
+  test("lineage") {
+    val rdd = sparkContext.parallelize(1 to 100).filter(_ % 2 == 0).map(_ * 2)
+    println("\n== RDD Lineage ==")
+    println("rdd definition: sparkContext.parallelize(1 to 100).filter(_ % 2 == 0)")
+    println(s"rdd lineage:${rdd.toDebugString}")
+    println(s"rdd.sum action: ${rdd.sum}\n")
+  }
+
   test("parallelize") {
     val xs = 1 to 1000000
     val rdd = sparkContext.parallelize(seq = xs, numSlices = 100)
