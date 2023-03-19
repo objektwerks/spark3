@@ -3,6 +3,9 @@ package objektwerks
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
+import SparkInstance._
+import sparkSession.implicits._
+
 class WindowTest extends AnyFunSuite with Matchers {
   val data = List(
     ("12", "2019-01-02 15:30:00"),
