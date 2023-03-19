@@ -90,7 +90,7 @@ class WindowTest extends AnyFunSuite with Matchers {
         session_window(
           timeColumn = col("datetime"),
           gapDuration = when(col("id") === lit(3), "10 seconds")
-                        .when(col("id") === 1,"30 seconds")
+                        .when(col("id") === lit(1),"30 seconds")
                         .otherwise("10 minutes")
         )
       )
