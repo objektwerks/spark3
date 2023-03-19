@@ -72,6 +72,13 @@ class WindowTest extends AnyFunSuite with Matchers {
   }
 
   test("session") {
-
+    val dataframe = dataset
+      .withWatermark("datetime", "10 minutes")
+      .groupBy(
+        col("id"),
+        session_window(col("datetime"), "5 minutes")
+      )
+      .count()
+    assert( dataframe.collect().nonEmpty )
   }
 }
