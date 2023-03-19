@@ -42,7 +42,7 @@ class WindowTest extends AnyFunSuite with Matchers {
     Event(4, "2019-01-02 15:50:30"),
     Event(4, "2019-01-02 15:52:00")
   )
-  val dataset = data.toDS()
+  val dataset = data.toDS().cache()
 
   test("tumbling") {
 
