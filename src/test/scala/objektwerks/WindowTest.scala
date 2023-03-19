@@ -95,7 +95,6 @@ class WindowTest extends AnyFunSuite with Matchers {
         )
       )
       .count()
-    dataframe.show(false)
     assert( dataframe.collect().nonEmpty )
   }
 }
