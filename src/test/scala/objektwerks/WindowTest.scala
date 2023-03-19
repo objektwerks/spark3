@@ -51,10 +51,10 @@ class WindowTest extends AnyFunSuite with Matchers {
 
   test("tumbling") {
     val dataframe = dataset
-      .withWatermark("datetime", "10 minutes")
+      .withWatermark(eventTime = "datetime", delayThreshold = "10 minutes")
       .groupBy(
         col("id"),
-        window(col("datetime"), "10 minutes")
+        window(timeColumn = col("datetime"), windowDuration = "10 minutes")
       )
       .count()
     assert( dataframe.collect().nonEmpty )
