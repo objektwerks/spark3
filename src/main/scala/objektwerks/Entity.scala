@@ -19,6 +19,12 @@ object Count {
   implicit val countSchema = Encoders.product[Count].schema
 }
 
+final case class Event(id: Int, datetime: String)
+object Event {
+  val eventSchema = Encoders.product[Event].schema
+  implicit def eventOrdering: Ordering[Event] = Ordering.by(_.id)
+}
+
 final case class Friend(id: Int, name: String, age: Int, score: Int)
 
 final case class KeyValue(key: Int, value: Int)
