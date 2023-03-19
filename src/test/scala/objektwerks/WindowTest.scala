@@ -81,4 +81,21 @@ class WindowTest extends AnyFunSuite with Matchers {
       .count()
     assert( dataframe.collect().nonEmpty )
   }
+
+  test("dynamic session") {
+    val dataframe = dataset
+      .withWatermark(eventTime = "datetime", delayThreshold = "10 minutes")
+      .groupBy(
+        col("id"),
+        session_window(
+          timeColumn = col("datetime"),
+          gapDuration = when(col("id") === lit(3), "10 seconds")
+                        .when(col("id") === 1,"30 seconds")
+                        .otherwise("10 minutes")
+        )
+      )
+      .count()
+    dataframe.show(false)
+    assert( dataframe.collect().nonEmpty )
+  }
 }
