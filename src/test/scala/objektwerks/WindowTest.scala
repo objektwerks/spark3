@@ -7,6 +7,10 @@ import org.scalatest.matchers.should.Matchers
 import SparkInstance._
 import sparkSession.implicits._
 
+/**
+  * This test is inspired by this article:
+  * https://towardsdatascience.com/spark-3-2-session-windowing-feature-for-streaming-data-e404d92e267
+  */
 class WindowTest extends AnyFunSuite with Matchers {
   val data = List(
     Event(1, "2023-01-02 15:30:00"),
