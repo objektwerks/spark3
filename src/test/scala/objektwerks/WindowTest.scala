@@ -41,7 +41,8 @@ class WindowTest extends AnyFunSuite with Matchers {
     ("22", "2019-01-02 15:52:00"),
     ("22", "2019-01-02 15:50:30"),
     ("22", "2019-01-02 15:52:00")
-)
+  )
+  val dataframe = data.toDF("id", "datetime")
 
   test("tumbling") {
 
