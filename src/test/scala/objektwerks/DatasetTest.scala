@@ -12,7 +12,7 @@ import org.scalatest.matchers.should.Matchers
 import SparkInstance._
 import sparkSession.implicits._
 
-class DatasetTest extends AnyFunSuite with Matchers with BeforeAndAfterAll{
+class DatasetTest extends AnyFunSuite with Matchers with BeforeAndAfterAll {
   val dataset = sparkSession.read.json("./data/person/person.json").as[Person].persist(StorageLevel.MEMORY_ONLY)
   dataset.write.json("./target/dataset/person.json")
 
@@ -90,7 +90,10 @@ class DatasetTest extends AnyFunSuite with Matchers with BeforeAndAfterAll{
   }
 
   test("filter > map") {
-    val betty = dataset.filter(_.name == "betty").map(_.name.toUpperCase).cache
+    val betty = dataset
+      .filter(_.name == "betty")
+      .map(_.name.toUpperCase)
+      .cache
     betty.count shouldBe 1
     betty.head shouldBe "BETTY"
   }
@@ -102,7 +105,11 @@ class DatasetTest extends AnyFunSuite with Matchers with BeforeAndAfterAll{
   }
 
   test("select > orderBy") {
-    val orderByName = dataset.select('name).orderBy('name).as[String].cache
+    val orderByName = dataset
+      .select('name)
+      .orderBy('name)
+      .as[String]
+      .cache
     orderByName.count shouldBe 4
     orderByName.head shouldBe "barney"
   }
@@ -151,7 +158,8 @@ class DatasetTest extends AnyFunSuite with Matchers with BeforeAndAfterAll{
 
   test("when > otherwise") {
     val personsWithGender = dataset
-      .withColumn("gender", when($"role" === "husband", "male").otherwise("female"))
+      .withColumn("gender", when($"role" === "husband", "male")
+      .otherwise("female"))
       .as[PersonWithGender]
     personsWithGender.collect.foreach {
       case PersonWithGender(_, _, _, "husband", gender) => gender shouldBe "male"
@@ -163,7 +171,10 @@ class DatasetTest extends AnyFunSuite with Matchers with BeforeAndAfterAll{
   test("window") {
     val window = Window.partitionBy('role).orderBy($"age".desc)
     val ranking = rank.over(window).as("rank")
-    val result = dataset.select(col("role"), col("name"), col("age"), ranking).as[(String, String, Long, Int)].cache
+    val result = dataset
+      .select(col("role"), col("name"), col("age"), ranking)
+      .as[(String, String, Long, Int)]
+      .cache
     ("wife", "wilma", 23, 1) shouldEqual result.head
   }
 
