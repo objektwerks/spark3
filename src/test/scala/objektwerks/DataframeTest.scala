@@ -122,8 +122,14 @@ class DataframeTest extends AnyFunSuite with Matchers with BeforeAndAfterAll {
   }
 
   test("select > agg > case class") {
-    dataframe.select(min(col("age"))).map(row => Age(row.getLong(0))).head shouldBe Age(21)
-    dataframe.select(max(col("age"))).map(row => Age(row.getLong(0))).head shouldBe Age(24)
+    dataframe
+      .select(min(col("age")))
+      .map(row => Age(row.getLong(0)))
+      .head shouldBe Age(21)
+    dataframe
+      .select(max(col("age")))
+      .map(row => Age(row.getLong(0)))
+      .head shouldBe Age(24)
   }
 
   test("groupBy > avg") {
