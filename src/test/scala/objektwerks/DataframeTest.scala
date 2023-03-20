@@ -36,7 +36,9 @@ class DataframeTest extends AnyFunSuite with Matchers with BeforeAndAfterAll {
   }
 
   test("add column") {
-    dataframe.withColumn("dog_age", $"age" * 7).head.getLong(4) shouldBe 168
+    dataframe
+      .withColumn("dog_age", $"age" * 7)
+      .head.getLong(4) shouldBe 168
   }
 
   test("update") {
