@@ -15,12 +15,12 @@ class PartitionTest extends AnyFunSuite with Matchers with BeforeAndAfterAll {
 
   override def afterAll(): Unit = dataframe.unpersist()
 
-  test("partition") { // wide dependency / transformation, full ( evenly distributed ) shuffle
+  test("partition") { // wide dependency-transformation, full ( evenly distributed ) shuffle
     dataframe.rdd.partitions.length shouldEqual 8
     dataframe.write.csv(s"./target/partitioned-numbers-${UUID.randomUUID.toString}")
   }
 
-  test("coalesce") { // narrow dependency / transformation, not a full shuffle to reduce partitions
+  test("coalesce") { // narrow dependency-transformation, not a full shuffle, designed to reduce partitions
     val coalesced = dataframe.coalesce(2)
     coalesced.rdd.partitions.length shouldEqual 2
     coalesced.write.csv(s"./target/coalesced-numbers-${UUID.randomUUID.toString}")
