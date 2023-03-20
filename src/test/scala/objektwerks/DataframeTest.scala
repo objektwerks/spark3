@@ -72,23 +72,35 @@ class DataframeTest extends AnyFunSuite with Matchers with BeforeAndAfterAll {
   }
 
   test("select > where") {
-    val selectByName = dataframe.select("name").where("name == 'barney'").cache
+    val selectByName = dataframe
+      .select("name")
+      .where("name == 'barney'")
+      .cache
     selectByName.count shouldBe 1
     selectByName.head.getString(0) shouldBe "barney"
 
-    val selectByAge = dataframe.select("age").where("age > 23").cache
+    val selectByAge = dataframe
+      .select("age")
+      .where("age > 23")
+      .cache
     selectByAge.count shouldBe 1
     selectByAge.head.getLong(0) shouldBe 24
   }
 
   test("select > orderBy") {
-    val orderByName = dataframe.select("name").orderBy("name").cache
+    val orderByName = dataframe
+      .select("name")
+      .orderBy("name")
+      .cache
     orderByName.count shouldBe 4
     orderByName.head.getString(0) shouldBe "barney"
   }
 
   test("sort") {
-    val sortByName = dataframe.select(col("id"), col("age"), col("name"), col("role")).sort("name").cache
+    val sortByName = dataframe
+      .select(col("id"), col("age"), col("name"), col("role"))
+      .sort("name")
+      .cache
     sortByName.count shouldBe 4
     sortByName.head.getLong(1) shouldBe 22
     sortByName.head.getString(2) shouldBe "barney"
@@ -149,7 +161,9 @@ class DataframeTest extends AnyFunSuite with Matchers with BeforeAndAfterAll {
   }
 
   test("when > otherwise") {
-    val personsWithGender = dataframe.withColumn("gender", when($"role" === "husband", "male").otherwise("female"))
+    val personsWithGender = dataframe
+      .withColumn("gender", when($"role" === "husband", "male")
+      .otherwise("female"))
     personsWithGender.collect.foreach {
       case Row(_, _, _, "husband", gender ) => gender shouldBe "male"
       case Row(_, _, _, "wife", gender) => gender shouldBe "female"
@@ -159,7 +173,10 @@ class DataframeTest extends AnyFunSuite with Matchers with BeforeAndAfterAll {
   test("window") {
     val window = Window.partitionBy("role").orderBy($"age".desc)
     val ranking = rank.over(window).as("rank")
-    val result = dataframe.select(col("role"), col("name"), col("age"), ranking).as[(String, String, Long, Int)].cache
+    val result = dataframe
+      .select(col("role"), col("name"), col("age"), ranking)
+      .as[(String, String, Long, Int)]
+      .cache
     ("wife", "wilma", 23, 1) shouldEqual result.head
   }
 
