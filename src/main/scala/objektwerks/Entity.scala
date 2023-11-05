@@ -16,7 +16,7 @@ object AvgAgeByRole {
 
 final case class Count(value: String, count: Long)
 object Count {
-  implicit val countSchema = Encoders.product[Count].schema
+  implicit val countSchema: StructType = Encoders.product[Count].schema
 }
 
 final case class Event(id: Int, datetime: String)
