@@ -23,15 +23,6 @@ Testing
 -------
 >Randomly ```sbt clean test``` will pass all tests; and sometimes it won't due to JDK internal access errors. 
 
-Architecture
-------------
->This model excludes the cluster manager, such as Standalone, Yarn, Mesos and Kubernetes.
-* Job 1 --> * Stage 1 --> * Task
-* Driver 1 <--> * Executor
-* Node 1 --> * JVM 1 --> * Executor
-* Executor 1 --> * Task | Partition
-* Task 1 --> 1 Partition
-
 Test
 ----
 1. sbt clean test
@@ -55,10 +46,19 @@ Logs
 ----
 1. target/app.log
 2. target/test.log
-ad
+
 Events
 ------
 1. target/local-*
+
+Architecture
+------------
+>This model of Spark architecture excludes the cluster manager, such as Standalone, Yarn, Mesos and Kubernetes.
+* Job 1 --> * Stage 1 --> * Task
+* Driver 1 <--> * Executor
+* Node 1 --> * JVM 1 --> * Executor
+* Executor 1 --> * Task | Partition
+* Task 1 --> 1 Partition
 
 Tuning
 ------
