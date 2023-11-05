@@ -4,7 +4,7 @@ Spark 3
 
 JDK
 ---
->Spark 3 3.5.0 requires ***JDK 8/11/17***.
+>Spark 3, version 3.5.0, requires ***JDK 8/11/17***.
 
 >This project has worked on ***JDK 19*** - but massively fails on ***JDK 21***!
 
