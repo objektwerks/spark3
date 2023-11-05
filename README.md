@@ -6,7 +6,7 @@ JDK
 ---
 >Spark 3, version 3.5.0, requires ***JDK 8/11/17***.
 
->This project has worked on ***JDK 19/20/21***. Yet not always, due to JDK internal access errors.
+>This project has worked on ***JDK 19/20/21***. Yet not always, due to JDK internal api access errors.
 
 >To target a specific JDK use:
 
@@ -15,7 +15,7 @@ JDK
 
 .jvmopts
 --------
->See ***.jvmopts*** for the how JDK internal access is allowed.
+>See ***.jvmopts*** for the how JDK internal api access is allowed.
 
 >See this discussion for details: [IllegalAccessError: class StorageUtils](https://stackoverflow.com/questions/72724816/running-unit-tests-with-spark-3-3-0-on-java-17-fails-with-illegalaccesserror-cl)
 
