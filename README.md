@@ -2,6 +2,17 @@ Spark 3
 -------
 >Spark 3 apps and tests.
 
+JDK
+---
+>Spark 3 3.5.0 requires ***JDK 8/11/17***.
+
+>This project has worked on ***JDK 19*** - but massively fails on ***JDK 21***!
+
+>To target a specific JDK use:
+
+1. sbt clean test -java-home $JAVA_HOME
+2. sbt run -java-home $JAVA_HOME
+
 Architecture
 ------------
 >This model excludes the cluster manager, such as Standalone, Yarn, Mesos and Kubernetes.
@@ -54,17 +65,6 @@ Tuning
 11. spark web ui
 12. spark web history ui
 13. tungsten
-
-JDK
----
->Spark 3 requires ***JDK 8/11/17***.
-
->This project does work on ***JDK 19***, but not ***JDK 21***!
-
->To target a specific JDK, via Sbt, use as follows:
-
-1. sbt clean test -java-home $JAVA_HOME
-2. sbt run -java-home $JAVA_HOME
 
 Resources
 ---------
