@@ -6,7 +6,7 @@ JDK
 ---
 >Spark 3, version 3.5.0, requires ***JDK 8/11/17***.
 
->This project has worked on ***JDK 19*** - but massively fails on ***JDK 21***!
+>This project has worked on ***JDK 19/20/21***. Yet not always, due to JDK internal access errors.
 
 >To target a specific JDK use:
 
@@ -15,11 +15,13 @@ JDK
 
 .jvmopts
 --------
->Spark 3 runs on ***JDK 17+***. See this project's ***.jvmopts*** for the ***how***.
+>See ***.jvmopts*** for the how JDK internal access is allowed.
 
->See this discussion for ***details***: https://stackoverflow.com/questions/72724816/running-unit-tests-with-spark-3-3-0-on-java-17-fails-with-illegalaccesserror-cl
+>See this discussion for details: [IllegalAccessError: class StorageUtils](https://stackoverflow.com/questions/72724816/running-unit-tests-with-spark-3-3-0-on-java-17-fails-with-illegalaccesserror-cl)
 
->At some point, this configuration will no longer be required.
+Testing
+-------
+>Randomly ```sbt clean test``` will pass all tests; and sometimes it won't due to JDK internal access errors. 
 
 Architecture
 ------------
