@@ -18,13 +18,17 @@ Test
 Run
 ---
 1. sbt clean run
->Multiple main classes detected. Select one to run:
-1. objektwerks.DeltaLakeApp
-2. objektwerks.FlightGraphApp
-3. objektwerks.KMeansApp
-4. objektwerks.LinearRegressionApp
-5. objektwerks.LogEntryApp
-6. objektwerks.RecommendationApp
+```
+Multiple main classes detected. Select one to run:
+ [1] objektwerks.DeltaLakeApp
+ [2] objektwerks.FlightGraphApp
+ [3] objektwerks.KMeansApp
+ [4] objektwerks.LinearRegressionApp
+ [5] objektwerks.LogEntryApp
+ [6] objektwerks.RecommendationApp
+
+Enter number:
+```
 
 Logs
 ----
