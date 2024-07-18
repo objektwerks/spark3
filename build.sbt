@@ -14,7 +14,7 @@ libraryDependencies ++= {
     "org.scala-lang.modules" %% "scala-parser-combinators" % "2.3.0",
     "io.delta" %% "delta-core" % "2.4.0",
     "org.scalikejdbc" %% "scalikejdbc" % "4.3.0",
-    "com.h2database" % "h2" % "2.2.224",
+    "com.h2database" % "h2" % "2.3.230",
     "org.scalatest" %% "scalatest" % "3.2.19" % Test
   )
 }
