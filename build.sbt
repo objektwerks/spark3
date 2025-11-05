@@ -11,7 +11,7 @@ libraryDependencies ++= {
     "org.apache.spark" %% "spark-hive" % sparkVersion,
     "org.apache.spark" %% "spark-mllib" % sparkVersion,
     "org.apache.spark" %% "spark-graphx" % sparkVersion,
-    "org.scala-lang.modules" %% "scala-parser-combinators" % "2.3.0",
+    "org.scala-lang.modules" %% "scala-parser-combinators" % "2.4.0",
     "io.delta" %% "delta-core" % "2.4.0",
     "org.scalikejdbc" %% "scalikejdbc" % "4.3.2",
     "com.h2database" % "h2" % "2.4.240",
